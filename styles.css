@@ -465,10 +465,10 @@ p {
   gap: 32px;
   margin-top: 40px;
 }
-@media (min-width: 700px) {
+@media (min-width: 800px) {
   .details {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px 56px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
   }
 }
 .details h3 {
@@ -486,6 +486,10 @@ p {
 }
 .footer .wrap {
   padding-block: 32px;
+}
+.ai-note {
+  margin: 16px 0 0;
+  font-size: 13px;
 }
 .footer-row {
   display: flex;
