@@ -1,0 +1,539 @@
+/* Colours follow the app's own palette (FontWriting/src/renderer/src/styles.css). */
+:root {
+  --bg: #f6f5f2;
+  --panel: #ffffff;
+  --band: #efede7;
+  --ink: #1d1d1f;
+  --muted: #6b6b70;
+  --line: #e2e0da;
+  --accent: #2f6fe4;
+  --accent-ink: #ffffff;
+  --guide: #8cc8ee;
+  --guide-strong: #2d9be0;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 40px rgba(0, 0, 0, 0.12);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #19191b;
+    --panel: #232326;
+    --band: #1f1f22;
+    --ink: #ececef;
+    --muted: #9a9aa2;
+    --line: #36363b;
+    --accent: #5b8ff0;
+    --guide: #2f5d7c;
+    --guide-strong: #4aa8e8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 48px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #19191b;
+  --panel: #232326;
+  --band: #1f1f22;
+  --ink: #ececef;
+  --muted: #9a9aa2;
+  --line: #36363b;
+  --accent: #5b8ff0;
+  --guide: #2f5d7c;
+  --guide-strong: #4aa8e8;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 48px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+/* Architect: a handwriting font made with FontWriter. Characters it lacks fall back to the system font. */
+@font-face {
+  font-family: 'Architect';
+  src: url('fonts/Architect.ttf') format('truetype');
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.55 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  color: var(--accent);
+}
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5em;
+}
+h1,
+h2 {
+  font-family: 'Architect', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+h1 {
+  font-size: clamp(2.6rem, 6.4vw, 4.6rem);
+}
+h2 {
+  font-size: clamp(2rem, 4.2vw, 3rem);
+}
+.made-with {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 28px;
+}
+h3 {
+  font-size: 1.3rem;
+}
+p {
+  margin: 0 0 1em;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 88px 16px;
+}
+@media (min-width: 700px) {
+  .wrap {
+    padding: 104px 32px;
+  }
+}
+.band {
+  background: var(--band);
+  border-block: 1px solid var(--line);
+}
+
+/* Top bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+}
+.brand img {
+  border-radius: 7px;
+}
+.topnav {
+  display: none;
+  gap: 24px;
+  margin-left: auto;
+}
+.topnav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 15px;
+}
+.topnav a:hover {
+  color: var(--ink);
+}
+@media (min-width: 700px) {
+  .topbar {
+    padding: 10px 32px;
+  }
+  .topnav {
+    display: flex;
+  }
+}
+.theme-toggle {
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+@media (min-width: 700px) {
+  .theme-toggle {
+    margin-left: 8px;
+  }
+}
+.theme-toggle:hover {
+  color: var(--ink);
+}
+
+/* Hero */
+.hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 72px 16px 88px;
+  text-align: center;
+  /* The printed template's cyan guide lines, faintly, behind the headline. */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 55px,
+    color-mix(in srgb, var(--guide) 45%, transparent) 55px 56px
+  );
+  background-size: 100% 336px;
+  background-repeat: no-repeat;
+  background-position: center 40px;
+}
+@media (min-width: 700px) {
+  .hero {
+    padding: 96px 32px 112px;
+  }
+}
+.hero-copy {
+  max-width: 760px;
+  margin: 0 auto 56px;
+}
+.hero-icon {
+  margin: 0 auto 24px;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+.lede {
+  font-size: 1.2rem;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto 32px;
+}
+.cta .fine {
+  margin-top: 12px;
+}
+.cta.center {
+  text-align: center;
+  margin-top: 56px;
+}
+.fine {
+  color: var(--muted);
+  font-size: 14px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.button.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.button.primary:hover {
+  transform: translateY(-1px);
+}
+.button:focus-visible,
+.theme-toggle:focus-visible,
+.shot a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  .button.primary:hover {
+    transform: none;
+  }
+}
+
+/* Screenshots */
+.shot {
+  margin: 0;
+}
+.shot a {
+  display: block;
+  border-radius: 12px;
+  cursor: zoom-in;
+}
+.shot img {
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+.hero-shot {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.shot figcaption {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.shot figcaption strong {
+  color: var(--ink);
+}
+.shot.wide {
+  max-width: 860px;
+  margin: 40px auto;
+}
+
+/* Two columns that stack on phones */
+.two-col {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .two-col {
+    grid-template-columns: 5fr 7fr;
+    gap: 56px;
+  }
+}
+.ways {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 18px;
+}
+.ways li {
+  padding-left: 18px;
+  border-left: 3px solid var(--guide-strong);
+}
+
+.section-lede {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 760px;
+}
+
+/* True height comparison */
+.compare {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+@media (min-width: 700px) {
+  .compare {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.compare figure {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 20px 16px;
+}
+.compare svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.compare figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.compare .guides line {
+  stroke: var(--guide);
+  stroke-width: 1.5;
+}
+.compare .guides .dash {
+  stroke-dasharray: 6 5;
+}
+.compare .guides .base {
+  stroke: var(--guide-strong);
+  stroke-width: 2;
+}
+.compare .ink path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.swatch {
+  flex: none;
+  width: 28px;
+  height: 0;
+  border-top: 2px solid var(--guide-strong);
+}
+
+/* Steps */
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 48px 0 0;
+  display: grid;
+  gap: 88px;
+}
+.step {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .step {
+    grid-template-columns: 4fr 7fr;
+    gap: 56px;
+  }
+  .step:nth-child(even) .step-copy {
+    order: 2;
+  }
+}
+.step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 15px;
+}
+.step-copy p {
+  color: var(--muted);
+}
+
+/* Letter editor */
+.tabs-grid {
+  display: grid;
+  gap: 40px;
+}
+@media (min-width: 800px) {
+  .tabs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 48px 0 0;
+  display: grid;
+  gap: 16px;
+  color: var(--muted);
+}
+@media (min-width: 800px) {
+  .feature-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+.feature-list strong {
+  color: var(--ink);
+}
+
+/* Details */
+.details {
+  display: grid;
+  gap: 32px;
+  margin-top: 40px;
+}
+@media (min-width: 700px) {
+  .details {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 56px;
+  }
+}
+.details h3 {
+  font-size: 1.15rem;
+}
+.details p {
+  color: var(--muted);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+}
+.footer .wrap {
+  padding-block: 32px;
+}
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+}
+
+/* Lightbox */
+.lightbox {
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: 96vw;
+  max-height: 94vh;
+}
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+}
+.lightbox img {
+  max-width: 96vw;
+  max-height: 94vh;
+  border-radius: 10px;
+}
+.lightbox-close {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Two screenshots for one step, the second tucked below and to the side of the first. */
+.shot-stack {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 900px) {
+  .shot-stack .shot + .shot {
+    width: 78%;
+    margin: -18% 0 0 auto;
+    position: relative;
+  }
+}

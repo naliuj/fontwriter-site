@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FontWriter: turn your handwriting into a real font</title>
+  <meta name="description" content="FontWriter is a Mac app that turns your handwriting into an OTF or TTF font. Print a template, write on it, scan it back, and export. Every letter keeps its true height.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#19191b" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FontWriter: turn your handwriting into a real font">
+  <meta property="og:description" content="Print a template, write on it, scan it back, and export an OTF or TTF font. A Mac app.">
+  <meta property="og:image" content="https://naliuj.github.io/fontwriter/images/og-image.png">
+  <meta property="og:url" content="https://naliuj.github.io/fontwriter/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply a saved theme before the page paints, so it doesn't flash.
+    try {
+      var t = localStorage.getItem('theme')
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="FontWriter home">
+      <img src="images/icon.png" alt="" width="28" height="28">
+      <span>FontWriter</span>
+    </a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#editor">Letter editor</a>
+      <a href="#details">Details</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch between light and dark" title="Switch between light and dark">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <img class="hero-icon" src="images/icon.png" alt="The FontWriter app icon" width="96" height="96">
+        <h1>Turn your handwriting into a real font.</h1>
+        <p class="lede">Print a template, write on it, and scan it back. FontWriter reads every letter and builds an OTF or TTF font you can install and type with.</p>
+        <div class="cta">
+          <a class="button primary" href="https://github.com/naliuj/fontwriter/releases/latest">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download for Mac
+          </a>
+          <p class="fine">macOS 13 or later · Apple silicon · Signed and notarized by Apple</p>
+        </div>
+        <p class="made-with">The headings on this page are set in Architect, a handwriting font made with FontWriter.</p>
+      </div>
+      <figure class="shot hero-shot">
+        <a href="images/review-full.webp"><img src="images/review.webp" alt="The Review step, showing a grid of handwritten letters from A to Z, a to z and 0 to 9, each drawn on its guide lines" width="1600" height="1046"></a>
+      </figure>
+    </section>
+
+    <section class="band" aria-labelledby="ways">
+      <div class="wrap two-col">
+        <div>
+          <h2 id="ways">Three ways to start</h2>
+          <ul class="ways">
+            <li><strong>Write on paper.</strong> Print a template, fill it in with your favourite pen, and scan or photograph it.</li>
+            <li><strong>Draw in the app.</strong> Draw each letter with a mouse, trackpad or pen tablet. Pressing lighter draws a thinner line.</li>
+            <li><strong>Fix up a font.</strong> Open an existing TTF or OTF, then align and reshape its letters.</li>
+          </ul>
+        </div>
+        <figure class="shot">
+          <a href="images/start-full.webp"><img src="images/start.webp" alt="The start screen, with Write on paper, Draw in the app and Fix up a font, and a recent project card" width="1600" height="1046" loading="lazy"></a>
+        </figure>
+      </div>
+    </section>
+
+    <section class="wrap truth" aria-labelledby="true-height">
+      <h2 id="true-height">Every letter keeps its true height</h2>
+      <p class="section-lede">Most handwriting font tools crop each letter to its own box. That lifts the tail of a g up onto the baseline and makes small letters as tall as capitals. FontWriter measures every letter from the printed baseline of its own box and uses one scale for all of them, so tails hang, small letters stay small, and your writing looks like your writing.</p>
+      <div class="compare">
+        <figure>
+          <svg viewBox="0 0 320 240" role="img" aria-labelledby="crop-t">
+            <title id="crop-t">Cropped to each letter: the g floats up so its tail sits on the baseline</title>
+            <g class="guides">
+              <line x1="10" x2="310" y1="40" y2="40"/><line x1="10" x2="310" y1="60" y2="60" class="dash"/>
+              <line x1="10" x2="310" y1="100" y2="100"/><line x1="10" x2="310" y1="200" y2="200" class="base"/>
+              <line x1="10" x2="310" y1="230" y2="230"/>
+            </g>
+            <g class="ink">
+              <path d="M112 118c-18-14-48-6-48 26s28 42 46 28M112 110v90"/>
+              <g transform="translate(0 -52)">
+                <path d="M212 118c-18-14-48-6-48 26s28 42 46 28M212 110v108c0 26-30 34-48 20"/>
+              </g>
+            </g>
+          </svg>
+          <figcaption>Cropped to each letter. The g jumps up to sit on the line.</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 320 240" role="img" aria-labelledby="true-t">
+            <title id="true-t">FontWriter: the g's tail hangs below the baseline, just as it was written</title>
+            <g class="guides">
+              <line x1="10" x2="310" y1="40" y2="40"/><line x1="10" x2="310" y1="60" y2="60" class="dash"/>
+              <line x1="10" x2="310" y1="100" y2="100"/><line x1="10" x2="310" y1="200" y2="200" class="base"/>
+              <line x1="10" x2="310" y1="230" y2="230"/>
+            </g>
+            <g class="ink">
+              <path d="M112 118c-18-14-48-6-48 26s28 42 46 28M112 110v90"/>
+              <path d="M212 118c-18-14-48-6-48 26s28 42 46 28M212 110v108c0 26-30 34-48 20"/>
+            </g>
+          </svg>
+          <figcaption>FontWriter. The tail hangs below the baseline, the way you wrote it.</figcaption>
+        </figure>
+      </div>
+      <p class="legend"><span class="swatch"></span>The printed guide lines sit exactly at the font's ascender, cap height, x-height, baseline and descender.</p>
+    </section>
+
+    <section class="wrap" id="how" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-copy">
+            <span class="step-num">1</span>
+            <h3>Pick your characters</h3>
+            <p>Start from presets like A to Z, digits, punctuation, accented letters and currency symbols, or type any characters you want. FontWriter lays them out on a printable template with a box for each one.</p>
+            <p>The guide lines print in a light cyan that disappears when the page is scanned, and a QR code on every page tells the app exactly which letters are on it.</p>
+          </div>
+          <figure class="shot">
+            <a href="images/characters-full.webp"><img src="images/characters.webp" alt="Step 1, Characters: character presets on the left and a zoomable preview of the printable template with a QR code and cyan guide lines" width="1600" height="1046" loading="lazy"></a>
+          </figure>
+        </li>
+        <li class="step">
+          <div class="step-copy">
+            <span class="step-num">2</span>
+            <h3>Scan it back, or draw</h3>
+            <p>Drop in scans or phone photos, in any order. The corner squares straighten a photo taken at an angle, and PDFs from office scanners work too.</p>
+            <p>Prefer to skip the paper? Draw each letter right in the app on the same guide lines, with pressure from a pen tablet.</p>
+          </div>
+          <div class="shot-stack">
+            <figure class="shot">
+              <a href="images/import-full.webp"><img src="images/import.webp" alt="Step 2, Import: four scanned template pages, each recognised with its page number and how many letters it holds" width="1600" height="1046" loading="lazy"></a>
+            </figure>
+            <figure class="shot">
+              <a href="images/draw-full.webp"><img src="images/draw.webp" alt="Step 2, Draw: a capital A drawn over a faint guide letter on the writing lines, with pen width, smoothing and pen pressure settings" width="1600" height="1046" loading="lazy"></a>
+            </figure>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-copy">
+            <span class="step-num">3</span>
+            <h3>Review every letter</h3>
+            <p>See the whole font at once, and try it out in the preview line. Tune the stroke weight and ink threshold for every letter together, set the spacing, and use Auto-align and Even heights to tidy things up in one click.</p>
+          </div>
+          <figure class="shot">
+            <a href="images/review-full.webp"><img src="images/review.webp" alt="Step 3, Review: the grid of letters with the stroke weight, ink threshold, spacing, auto-align and even heights controls above it" width="1600" height="1046" loading="lazy"></a>
+          </figure>
+        </li>
+        <li class="step">
+          <div class="step-copy">
+            <span class="step-num">4</span>
+            <h3>Export and install</h3>
+            <p>Preview the finished font with any text you like, then export it as a .ttf or .otf file. Open it in Font Book to install it, and type with your handwriting anywhere on your Mac.</p>
+          </div>
+          <figure class="shot">
+            <a href="images/export-full.webp"><img src="images/export.webp" alt="Step 4, Export: buttons to export .ttf or .otf beside a live preview of the finished font, reading The quick brown fox jumps over the lazy dog" width="1600" height="481" loading="lazy"></a>
+          </figure>
+        </li>
+      </ol>
+    </section>
+
+    <section class="band" id="editor" aria-labelledby="editor-h">
+      <div class="wrap">
+        <h2 id="editor-h">A letter editor for the details</h2>
+        <p class="section-lede">Open any letter in its own window and fix it by hand. Drag its box to move or stretch it, with handles that snap to the guide lines.</p>
+        <figure class="shot wide">
+          <a href="images/editor-position-full.webp"><img src="images/editor-position.webp" alt="The letter editor window showing a g inside a box with eight drag handles, its tail hanging below the baseline" width="1600" height="1157" loading="lazy"></a>
+        </figure>
+        <div class="tabs-grid">
+          <figure class="shot">
+            <a href="images/editor-strokes-full.webp"><img src="images/editor-strokes.webp" alt="The Strokes tab, with the letter's pen strokes found automatically and a box to move or rotate one of them" width="1600" height="1157" loading="lazy"></a>
+            <figcaption><strong>Strokes.</strong> FontWriter finds the pen strokes in each letter. Move, resize or rotate one stroke, or just part of it.</figcaption>
+          </figure>
+          <figure class="shot">
+            <a href="images/editor-ink-full.webp"><img src="images/editor-ink.webp" alt="The Ink tab, zoomed in on a letter with a brush for painting and erasing ink" width="1600" height="1157" loading="lazy"></a>
+            <figcaption><strong>Ink.</strong> Paint over a gap or erase a stray mark, zoomed in as far as you need.</figcaption>
+          </figure>
+        </div>
+        <ul class="feature-list">
+          <li><strong>Position and Shape.</strong> Shift, resize, slant and rotate a letter, or stretch its top to a guide line.</li>
+          <li><strong>Sample.</strong> Wrote a letter more than once? Pick the copy you like best.</li>
+          <li><strong>Live context.</strong> The letter is shown next to its neighbours in the font you're building, as you edit it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap" id="details" aria-labelledby="details-h">
+      <h2 id="details-h">The details</h2>
+      <div class="details">
+        <div>
+          <h3>Private by design</h3>
+          <p>Everything happens on your Mac. Your scans and letters never leave it, and the app works offline.</p>
+        </div>
+        <div>
+          <h3>Pages in any order</h3>
+          <p>The QR code on each page carries its letters, so you can scan pages whenever and however you like.</p>
+        </div>
+        <div>
+          <h3>Projects you can come back to</h3>
+          <p>Save your work as a project file, reopen it later, and pick up exactly where you stopped.</p>
+        </div>
+        <div>
+          <h3>Signed and notarized</h3>
+          <p>FontWriter is signed with a Developer ID and notarized by Apple, so it opens without warnings.</p>
+        </div>
+      </div>
+      <div class="cta center">
+        <a class="button primary" href="https://github.com/naliuj/fontwriter/releases/latest">Download for Mac</a>
+        <p class="fine">macOS 13 or later · Apple silicon</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>© 2026 Julian Rose</span>
+      <a href="https://github.com/naliuj/fontwriter">FontWriter on GitHub</a>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" aria-label="Screenshot">
+    <form method="dialog"><button class="lightbox-close" aria-label="Close">×</button></form>
+    <img alt="">
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
