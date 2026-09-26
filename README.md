@@ -1,6 +1,6 @@
 # FontWriter website
 
-The site for [FontWriter](https://naliuj.github.io/fontwriter-site/), a Mac app that turns your handwriting into an OTF or TTF font.
+The site for [FontWriter](https://fontwriter.julianro.se/), a Mac app that turns your handwriting into an OTF or TTF font.
 
 It's plain HTML, CSS and a little JavaScript, served by GitHub Pages from the root of `main`. There's no build step: open `index.html` in a browser, or serve the folder with any static server.
 
